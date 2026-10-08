@@ -53,26 +53,6 @@ platform.
 
 ---
 
-# 🎯 The Problem
-
-Traditional recruitment workflows often involve multiple disconnected tools:
-
-```text
-Job Posting
-     ↓
-Application Collection
-     ↓
-Resume Screening
-     ↓
-Candidate Shortlisting
-     ↓
-Interview Scheduling
-     ↓
-Interview Evaluation
-     ↓
-Recruiter Decision
--------------------------
-
 
 HireAI brings these workflows together:
 
