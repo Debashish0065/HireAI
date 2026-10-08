@@ -1,0 +1,67 @@
+Folder PATH listing for volume Windows-SSD
+Volume serial number is 00000157 28CE:4F54
+C:\PROJECT\HIREAI\HIREAI-FRONTEND\SRC
+¦   App.css
+¦   App.jsx
+¦   index.css
+¦   main.jsx
+¦   
++---assets
+¦       hero.png
+¦       react.svg
+¦       vite.svg
+¦       
++---components
+¦   +---common
+¦   +---navbar
+¦   +---sidebar
+¦   +---ui
++---context
++---layouts
++---pages
+¦   ¦   Notifications.jsx
+¦   ¦   
+¦   +---admin
+¦   ¦       AdminAnalytics.jsx
+¦   ¦       AdminApplications.jsx
+¦   ¦       AdminDashboard.jsx
+¦   ¦       AdminInterviews.jsx
+¦   ¦       AdminJobs.jsx
+¦   ¦       AdminUsers.jsx
+¦   ¦       
+¦   +---applications
+¦   ¦       ApplicationDetails.jsx
+¦   ¦       MyApplications.jsx
+¦   ¦       
+¦   +---auth
+¦   ¦       Login.jsx
+¦   ¦       
+¦   +---candidate
+¦   +---dashboard
+¦   ¦       Dashboard.jsx
+¦   ¦       
+¦   +---error
+¦   +---hr
+¦   ¦       CreateJob.jsx
+¦   ¦       EditJob.jsx
+¦   ¦       HRApplicants.jsx
+¦   ¦       HRDashboard.jsx
+¦   ¦       HRInterviewDetails.jsx
+¦   ¦       HRInterviews.jsx
+¦   ¦       HRJobs.jsx
+¦   ¦       
+¦   +---jobs
+¦   ¦       JobDetails.jsx
+¦   ¦       Jobs.jsx
+¦   ¦       
+¦   +---profile
+¦   ¦       Profile.jsx
+¦   ¦       
+¦   +---resume
+¦           Resume.jsx
+¦           
++---routes
++---services
+¦       api.js
+¦       
++---utils

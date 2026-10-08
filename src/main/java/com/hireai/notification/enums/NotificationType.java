@@ -1,0 +1,20 @@
+package com.hireai.notification.enums;
+
+public enum NotificationType {
+
+    APPLICATION_SUBMITTED,
+
+    APPLICATION_SHORTLISTED,
+
+    INTERVIEW_SCHEDULED,
+
+    INTERVIEW_COMPLETED,
+
+    APPLICATION_SELECTED,
+
+    APPLICATION_REJECTED,
+
+    NEW_APPLICATION,
+
+    SYSTEM
+}

@@ -1,0 +1,135 @@
+services:
+
+  # =========================================
+  # MYSQL DATABASE
+  # =========================================
+  mysql:
+    image: mysql:8.0
+    container_name: hireai-mysql
+
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_HOST: "%"
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p${DB_PASSWORD}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+    networks:
+      - hireai-network
+
+
+  # =========================================
+  # HIREAI SPRING BOOT BACKEND
+  # =========================================
+  hireai-backend:
+    image: hireai-backend:1.0
+    container_name: hireai-backend
+
+    restart: unless-stopped
+
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+    ports:
+      - "${SERVER_PORT}:8080"
+
+    environment:
+
+      # -----------------------------------------
+      # SERVER
+      # -----------------------------------------
+      SERVER_PORT: 8080
+
+      # -----------------------------------------
+      # DATABASE
+      # -----------------------------------------
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USE_SSL: ${DB_USE_SSL}
+
+      # -----------------------------------------
+      # JPA
+      # -----------------------------------------
+      JPA_DDL_AUTO: ${JPA_DDL_AUTO}
+
+      # -----------------------------------------
+      # RESUME STORAGE
+      # -----------------------------------------
+      RESUME_UPLOAD_DIR: ${RESUME_UPLOAD_DIR}
+      MAX_FILE_SIZE: ${MAX_FILE_SIZE}
+      MAX_REQUEST_SIZE: ${MAX_REQUEST_SIZE}
+
+      # -----------------------------------------
+      # GEMINI AI
+      # -----------------------------------------
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      GEMINI_MODEL: ${GEMINI_MODEL}
+
+      # -----------------------------------------
+      # EMAIL
+      # -----------------------------------------
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+
+      # -----------------------------------------
+      # JWT
+      # -----------------------------------------
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION_MS: ${JWT_EXPIRATION_MS}
+
+    volumes:
+      - hireai_resumes:/app/uploads/resumes
+
+    networks:
+      - hireai-network
+
+
+# =========================================
+# PERSISTENT VOLUMES
+# =========================================
+volumes:
+
+  mysql_data:
+    name: hireai-mysql-data
+
+  hireai_resumes:
+    name: hireai-resumes
+
+
+# =========================================
+# NETWORK
+# =========================================
+networks:
+
+  hireai-network:
+    name: hireai-network
+    driver: bridge
